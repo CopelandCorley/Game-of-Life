@@ -1,5 +1,5 @@
 # Game-of-Life
-	This is an implementation of Conway's Game of Life (CGoL). CGoL is a cellular automaton devised by mathematician 
+This is an implementation of Conway's Game of Life (CGoL). CGoL is a cellular automaton devised by mathematician 
 John Conway. The game starts with a two-dimensional grid of cells. Each cell can be either alive or dead with 
 a filled-in cell typically representing a live cell and a non-filled-in cell, a dead cell. A cell's neighbors are any one 
 of the eight cells surrounding that cell. When the game moves forward a step, each cell counts its number of living 
@@ -12,7 +12,7 @@ neighbors and will do one of following:
 The borders of the cell grid in this implementation wrap around so that cells on the top are neighbors to those on the 
 bottom and similarly for cells on the left and right edges.
 
-	In standard implementations of CGoL, each cell checks the state of all eight of its neighbors every time the simulation 
+In standard implementations of CGoL, each cell checks the state of all eight of its neighbors every time the simulation 
 moves forward a step. This gives O(8n). This implementation uses an improved method of checking each cell's number of living 
 neighbors that reduces the time complexity of the step function. The GameOfLife class models an instance of a CGoL simulation. 
 The class uses a one-dimensional Cell list to track all the cells in the simulation. The Cell class contains a dictionary 
@@ -28,7 +28,7 @@ state where no cells die or spawn; the worst case occurs when the simulation is 
 will die on the next step, causing every cell to access all eight neighbors to update each neighbors' livingNeighbors 
 variable.
 
-	Something that I have not tested but suspect is an improvement to the standard CGoL implementation is the way in 
+Something that I have not tested but suspect is an improvement to the standard CGoL implementation is the way in 
 which I calculate the the neighbors of each cell. Rather than use multiple if statements which are long and hard to read 
 because they have to account for the wrapping borders, I came up with some expressions which are just hard to read and 
 return the position of a neighboring cell considering wrapping if the cells are stored in a one-dimensional array. 
@@ -43,7 +43,7 @@ cells[numCells], that contains all of cells in the simulation:
 
 is the bottom neighbor of cells[i].
 
-	Another cool thing is that you only need expressions to calculate the top, left, bottom, and right neighbors of a 
+Another cool thing is that you only need expressions to calculate the top, left, bottom, and right neighbors of a 
 cell. After you have calculated the neighbors at those positions, you can just do something like 
 
 	cells[i].topLeftNeighbor = cells[i].leftNeighbor.topNeighbor
@@ -57,7 +57,7 @@ bottom neighbor of the cell at cells[i][j] with:
 In this instance, the equation for the column is the same as the one-dimensional equation but with rowSize factored out as j. 
 The remaining two-dimensional neighbor-finding expressions are a little more complex to work out.
 
-	I'm not sure if using the neighbor-finding expressions is better or worse in one-dimensional or two-dimensional arrays, 
+I'm not sure if using the neighbor-finding expressions is better or worse in one-dimensional or two-dimensional arrays, 
 however, they both have the benefit of being less lines to code than using if statements, perhaps at the cost of being more
 cryptic. Whichever method chosen, it matters little for time complexity since the neighbor-finding code is only run once in the 
 beginning for every CGoL simulation. I plan to do some testing in the future to gather what if any benefits there are to using
