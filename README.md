@@ -26,7 +26,7 @@ livingNeighbors variable when C dies or spawns. This method will increase space 
 case time complexity of O(n) and worst case of O(8n). The best case occurs when the simulation is in a stable, unchanging 
 state where no cells die or spawn; the worst case occurs when the simulation is completely full of cells and every cell 
 will die on the next step, causing every cell to access all eight neighbors to update each neighbors' livingNeighbors 
-variable.
+variable. On average, though, the time complexity of the algorithm will be somewhere between O(n) and O(8n).
 
 Something that I have not tested but suspect is an improvement to the standard CGoL implementation is the way in 
 which I calculate the the neighbors of each cell. Rather than use multiple if statements which are long and hard to read 
@@ -48,13 +48,15 @@ cell. After you have calculated the neighbors at those positions, you can just d
 
 	cells[i].topLeftNeighbor = cells[i].leftNeighbor.topNeighbor
 
-to get the remaining neighbors in the corners. And with a little modification, each of these expressions could be used in 
-a two-dimensional array to get the same effect. Using a two-dimensional array, cells[columnSize][rowSize], you could get the
+to get the remaining neighbors in the corners. 
+
+With a little modification, each of these expressions could be used in a two-dimensional array to get the same 
+effect as in a one-dimensional array. Using the two-dimensional array cells[columnSize][rowSize], you could get the
 bottom neighbor of the cell at cells[i][j] with:
 
 	cells[(i + 1) % columnSize][j]
 
-In this instance, the equation for the column is the same as the one-dimensional equation but with rowSize factored out as j. 
+In this instance, the equation for i in the column is the same as the one-dimensional equation but with rowSize factored out as j. 
 The remaining two-dimensional neighbor-finding expressions are a little more complex to work out.
 
 I'm not sure if using the neighbor-finding expressions is better or worse in one-dimensional or two-dimensional arrays, 
