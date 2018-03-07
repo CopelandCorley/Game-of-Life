@@ -1,7 +1,6 @@
 #This is an implementation of Conway's Game of Life (CGoL) by Copeland Corley.
 
 from random import choice
-import copy
 
 class Cell:
     def __init__(self):
@@ -53,13 +52,13 @@ class GameOfLife:
 
     #move one step forward in the simulation
     def step(self):
-        selfCopy = copy.deepcopy(self)
+        neighborsCopy = [i.livingNeighbors for i in self.cells]
         for i in range(self.size ** 2):
             thisCell = self.cells[i]
-            thisCellCopy = selfCopy.cells[i]
-            if not (2 <= thisCellCopy.livingNeighbors <= 3) and thisCellCopy.isAlive:
+            livingNeighbors = neighborsCopy[i]
+            if not (2 <= livingNeighbors <= 3) and thisCell.isAlive:
                 thisCell.die()
-            elif thisCellCopy.livingNeighbors == 3 and not thisCellCopy.isAlive:
+            elif livingNeighbors == 3 and not thisCell.isAlive:
                 thisCell.spawn()
 
     #return string representing grid of cells in simulation, o = live cell, _ = dead cell
@@ -72,7 +71,7 @@ class GameOfLife:
         return cellsString
 
 ###uncomment to test
-##x = GameOfLife(10)
+##x = GameOfLife(25)
 ##print(x.toString())
 ##for i in range(100):
 ##    x.step()
